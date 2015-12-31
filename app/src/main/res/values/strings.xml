@@ -4,4 +4,6 @@
     <string name="action_menu1">Menu1</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="autocomplete_hint">Search</string>
+
 </resources>

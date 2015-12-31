@@ -43,6 +43,8 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+
+
         map  = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         LatLng LOCATION_BURNABY = new LatLng(49.27645, -122.917587);
         map.addMarker(new MarkerOptions().position(LOCATION_BURNABY).title("Find me here!"));
