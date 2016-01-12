@@ -6,26 +6,23 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Main2Activity extends AppCompatActivity {
-    MapView mapView;
+
     GoogleMap map;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
-
+    private AutoCompleteTextView placeAutocomplete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +40,15 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+        placeAutocomplete=(AutoCompleteTextView)findViewById(R.id.autocomplete_places);
 
+        String[] languages={"Android ","java","IOS","SQL","JDBC","Web services"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,languages);
+        placeAutocomplete.setAdapter(adapter);
 
-        map  = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+       // map  = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        SupportMapFragment mapFrag  = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        map = mapFrag.getMap();
         LatLng LOCATION_BURNABY = new LatLng(49.27645, -122.917587);
         map.addMarker(new MarkerOptions().position(LOCATION_BURNABY).title("Find me here!"));
 //        mMap = googleMap;
