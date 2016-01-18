@@ -41,9 +41,13 @@ import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 import android.content.res.Resources;
@@ -69,6 +73,8 @@ public class Main2Activity extends AppCompatActivity
      * GoogleApiClient wraps our service connection to Google Play Services and provides access
      * to the user's sign in state as well as the Google's APIs.
      */
+    GoogleMap map;
+
     protected GoogleApiClient mGoogleApiClient;
 
     private PlaceAutocompleteAdapter mAdapter;
@@ -133,6 +139,15 @@ public class Main2Activity extends AppCompatActivity
                 mAutocompleteView.setText("");
             }
         });
+
+        SupportMapFragment mapFrag  = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        map = mapFrag.getMap();
+        LatLng LOCATION_BURNABY = new LatLng(49.27645, -122.917587);
+        map.addMarker(new MarkerOptions().position(LOCATION_BURNABY).title("Find me here!"));
+//        mMap = googleMap;
+        map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(LOCATION_BURNABY, 14);
+        map.animateCamera(update);
     }
 
     /**
@@ -193,6 +208,14 @@ public class Main2Activity extends AppCompatActivity
 
 
             Double lat = place.getLatLng().latitude;
+
+          //  LatLng LOCATION_BURNABY = new LatLng(49.27645, -122.917587);
+            map.addMarker(new MarkerOptions().position(place.getLatLng()).title("Find me here!"));
+//        mMap = googleMap;
+            map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 14);
+            map.animateCamera(update);
+
             // Format details of the place for display and show it in a TextView.
             mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
                     place.getId(), place.getAddress(),lat.toString(),

@@ -16,20 +16,24 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:fillViewport="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
->
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
         <TextView
             android:layout_marginTop="80dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="aaa"
+            android:text="Search Location  "
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <AutoCompleteTextView
@@ -74,5 +78,19 @@
             android:autoLink="all"
             android:text=""
             android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            tools:layout="@layout/activity_main2" />
+
+
     </LinearLayout>
+
 </ScrollView>
